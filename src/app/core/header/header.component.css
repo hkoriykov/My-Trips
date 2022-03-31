@@ -1,13 +1,16 @@
-  .bi {
-    vertical-align: -.125em;
-    fill: currentColor;
-  }
-  
-  .text-small {
-    font-size: 85%;
-  }
-  
-  .dropdown-toggle {
-    outline: 0;
-  }
-  
+a:link {
+  text-decoration: none;
+}
+
+.link {
+  color: black;
+}
+
+.login {
+  margin-right: 15px;
+}
+
+.logout {
+  margin-left: 15px;
+}
+

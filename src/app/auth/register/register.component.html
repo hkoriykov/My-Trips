@@ -1,1 +1,27 @@
-<p>This is Register component</p>
+<form class="register" action="" method="post">
+    <fieldset>
+        <h2>Registration Form</h2>
+
+        <!-- email -->
+        <p class="field">
+            <input [(ngModel)]="email" type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
+        </p>
+
+        <!-- password -->
+        <p class="field">
+            <input [(ngModel)]="password" type="password" name="password" id="password" placeholder="******" />
+        </p>
+
+        <p class="text-danger">{{errorMessage}}</p>
+      
+
+        <button type="button" class="btn btn-light" (click)="signUp()">Create Account</button>
+
+
+        <p class="text-center">
+            Have an account?
+            <a routerLink="/login">Log In</a>
+        </p>
+
+    </fieldset>
+</form>

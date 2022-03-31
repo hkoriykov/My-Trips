@@ -1,1 +1,25 @@
-<p>This is login component</p>
+<form class="login" action="" method="post">
+    <fieldset>
+        <h2>Login Form</h2>
+
+        <p class="field">
+            <input [(ngModel)]="email" class="input-error" type="email" name="email" id="email" placeholder="john.doe@gmail.com" />
+        </p>
+
+        <p class="field">
+            <input [(ngModel)]="password" type="password" name="password" id="password" placeholder="******" />
+        </p>
+
+        <p class="text-danger">{{errorMessage}}</p>
+
+
+        <button type="button" class="btn btn-light" (click)="signIn()">Login</button>
+
+        <p class="text-center">
+            Don't have an account?
+            <a routerLink="/register">Sign Up</a>
+            for free :)
+        </p>
+
+    </fieldset>
+</form>
