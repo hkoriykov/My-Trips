@@ -1,7 +1,7 @@
-<div class="container px-4 py-5" id="custom-cards">
+<div class="container px-4 py-5" id="trip-cards">
   <h2 class="pb-2 border-bottom">Trips you might be interested in...</h2>
 
-  <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5" *ngIf="tripList">
+  <div class="row row-cols-1 row-cols-lg-3 g-4 py-5" *ngIf="tripList">
     <app-trip-list-item *ngFor="let trip of tripList" [trip]="trip"></app-trip-list-item>
     <div *ngIf="tripList.length === 0">No Trips!</div>
   </div>
