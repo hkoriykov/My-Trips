@@ -11,4 +11,10 @@
     background-position: center center;
     background-size: cover;
   }
+
+  .currency {
+    position: absolute;
+    margin-left: 70% !important;
+    margin-top: 25%!important;
+  }
   

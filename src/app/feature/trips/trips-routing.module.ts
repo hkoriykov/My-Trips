@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'trips/new',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: TripsNewPageComponent,
   },
   {

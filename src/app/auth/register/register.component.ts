@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../core/authentication.service';
+import { AuthenticationService } from '../../core/services/authentication/authentication.service';
+import { emailValidator } from '../util';
 
 @Component({
   selector: 'app-register',
@@ -9,30 +15,36 @@ import { AuthenticationService } from '../../core/authentication.service';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  email!: string;
-  password!: string;
-  errorMessage!: string;
+  firebaseErrorMessage!: string;
+
+  registerFormGroup: FormGroup = this.formBuilder.group({
+    email: new FormControl('', [Validators.required, emailValidator]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
   constructor(
-    private angularFireAuth: AngularFireAuth,
+    private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router
   ) {}
 
-  signUp(): void {
-    this.angularFireAuth
-      .createUserWithEmailAndPassword(this.email, this.password)
+  handleRegister(): void {
+    this.authenticationService
+      .SignUp(
+        this.registerFormGroup.value.email,
+        this.registerFormGroup.value.password
+      )
       .then((res: any) => {
         console.log('You are Successfully signed up!', res);
         this.authenticationService.isAuthenticated = true;
         this.router.navigate(['/home']);
-
-        this.email = '';
-        this.password = '';
       })
       .catch((err) => {
         console.log('Something is wrong:', err.message);
-        this.errorMessage = err;
+        this.firebaseErrorMessage = err;
       });
   }
 }

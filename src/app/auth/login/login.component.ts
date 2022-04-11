@@ -1,7 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthenticationService } from '../../core/authentication.service';
+import { AuthenticationService } from '../../core/services/authentication/authentication.service';
+import { emailValidator } from '../util';
 
 @Component({
   selector: 'app-login',
@@ -9,31 +15,37 @@ import { AuthenticationService } from '../../core/authentication.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-  email!: string;
-  password!: string;
-  errorMessage!: string;
+  firebaseErrorMessage!: string;
+
+  loginFormGroup: FormGroup = this.formBuilder.group({
+    email: new FormControl('', [Validators.required, emailValidator]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+  });
 
   constructor(
-    private angularFireAuth: AngularFireAuth,
+    private formBuilder: FormBuilder,
     private authenticationService: AuthenticationService,
     private router: Router
   ) {}
 
-  signIn() {
-    this.angularFireAuth
-      .signInWithEmailAndPassword(this.email, this.password)
+  handleLogin() {
+    this.authenticationService
+      .SignIn(
+        this.loginFormGroup.value.email,
+        this.loginFormGroup.value.password
+      )
       .then(() => {
         console.log('You are in!');
         this.authenticationService.isAuthenticated = true;
         this.router.navigate(['/home']);
-
-        this.email = '';
-        this.password = '';
       })
       .catch((err) => {
         console.log('Something went wrong:', err.message);
         this.authenticationService.isAuthenticated = false;
-        this.errorMessage = err;
+        this.firebaseErrorMessage = err;
       });
   }
 }

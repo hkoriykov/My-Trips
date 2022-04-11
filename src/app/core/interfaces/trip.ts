@@ -1,4 +1,5 @@
 export interface ITrip {
-  tripName: string;
-  url: string;
+  destinationName: string;
+  localCurrency: string;
+  imageUrl: string;
 }

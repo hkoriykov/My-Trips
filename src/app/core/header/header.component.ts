@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AuthenticationService } from '../authentication.service';
+import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -12,13 +11,10 @@ export class HeaderComponent {
     return this.authenticationService.isAuthenticated;
   }
 
-  constructor(
-    private angularFireAuth: AngularFireAuth,
-    private authenticationService: AuthenticationService
-  ) {}
+  constructor(private authenticationService: AuthenticationService) {}
 
   logoutHandler(): void {
     this.authenticationService.isAuthenticated = false;
-    this.angularFireAuth.signOut();
+    this.authenticationService.SignOut();
   }
 }

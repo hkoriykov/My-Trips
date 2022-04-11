@@ -5,6 +5,7 @@ import { TripsNewPageComponent } from './trips-new-page/trips-new-page.component
 import { WishlistPageComponent } from './wishlist-page/wishlist-page.component';
 import { TripDetailPageComponent } from './trip-detail-page/trip-detail-page.component';
 import { TripListItemComponent } from './trip-list-item/trip-list-item.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,7 @@ import { TripListItemComponent } from './trip-list-item/trip-list-item.component
     TripDetailPageComponent,
     TripListItemComponent,
   ],
-  imports: [CommonModule, TripsRoutingModule],
+  imports: [CommonModule, TripsRoutingModule, FormsModule],
   exports: [TripListItemComponent],
 })
 export class TripsModule {}

@@ -1,20 +1,41 @@
-<form class="container">
+<div class="container">
     <h1>Registration Form</h1>
-    <form>
+    <form class="register" [formGroup]="registerFormGroup" (ngSubmit)="handleRegister()">
         <div class="form-group mb-3">
-            <input [(ngModel)]="email" class="form-control" type="email" name="email" id="email"
+            <input formControlName="email" class="form-control" type="email" name="email" id="email"
                 placeholder="ivan.ivanov@gmail.com" required>
         </div>
+
+        <ng-container *ngIf="registerFormGroup.controls['email'].touched && registerFormGroup.controls['email'].invalid">
+            <p *ngIf="registerFormGroup.controls['email'].errors?.['required']"  class="alert alert-danger">
+              Email is required!
+            </p>
+      
+            <p *ngIf="registerFormGroup.controls['email'].errors?.['email']" class="alert alert-danger">
+              Email is not valid!
+            </p>
+          </ng-container>
+
+
         <div class="form-group mb-3">
-            <input [(ngModel)]="password" class="form-control" type="password" name="password" id="password"
+            <input formControlName="password" class="form-control" type="password" name="password" id="password"
                 placeholder="******" />
         </div>
 
+        <ng-container *ngIf="registerFormGroup.controls['password'].touched && registerFormGroup.controls['password'].invalid">
+            <p *ngIf="registerFormGroup.controls['password'].errors?.['required']" class="alert alert-danger">
+              Password is required!
+            </p>
+            <p *ngIf="registerFormGroup.controls['password'].errors?.['minlength']" class="alert alert-danger">
+              Password must be at least 6 characters long!
+            </p>
+          </ng-container>
+
         <div>
-            <p class="text-danger">{{errorMessage}}</p>
+            <p class="text-danger">{{firebaseErrorMessage}}</p>
         </div>
 
-        <button type="button" class="btn btn-outline-secondary mb-3" (click)="signUp()">Create Account</button>
+        <button [disabled]="registerFormGroup.invalid" class="btn btn-outline-secondary mb-3">Create Account</button>
 
         <p class="text-center">
             Have an account?
@@ -22,4 +43,4 @@
         </p>
 
     </form>
-</form>
+</div>

@@ -4,8 +4,8 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AuthModule } from '../auth/auth.module';
 import { RouterModule } from '@angular/router';
-import { AuthenticationService } from './authentication.service';
-import { TripService } from './trip.service';
+import { AuthenticationService } from './services/authentication/authentication.service';
+import { FileUploadService } from './services/file-upload/file-upload.service';
 
 @NgModule({
   declarations: [HeaderComponent, FooterComponent],
@@ -16,7 +16,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
       ngModule: CoreModule,
-      providers: [AuthenticationService, TripService],
+      providers: [AuthenticationService, FileUploadService],
     };
   }
 }
