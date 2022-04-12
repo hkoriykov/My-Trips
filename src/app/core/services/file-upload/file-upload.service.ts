@@ -17,7 +17,6 @@ export class FileUploadService {
     private storage: AngularFireStorage
   ) {}
   pushFileToStorage(fileUpload: FileUpload): Observable<number | undefined> {
-    debugger;
     const filePath = `${this.basePath}/${fileUpload.file.name}`;
     const storageRef = this.storage.ref(filePath);
     const uploadTask = this.storage.upload(filePath, fileUpload.file);

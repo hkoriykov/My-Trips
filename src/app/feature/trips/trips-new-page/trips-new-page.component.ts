@@ -1,10 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { FileUpload } from 'src/app/core/models/file-upload';
 import { FileUploadService } from 'src/app/core/services/file-upload/file-upload.service';
+import { TripService } from 'src/app/core/services/trip/trip.service';
 
 @Component({
   selector: 'app-trips-new-page',
@@ -13,7 +12,6 @@ import { FileUploadService } from 'src/app/core/services/file-upload/file-upload
 })
 export class TripsNewPageComponent {
   @ViewChild('tripForm') tripForm!: NgForm;
-  trips: Observable<any[]>;
   errorMessage!: any;
 
   selectedFiles?: FileList;
@@ -21,21 +19,15 @@ export class TripsNewPageComponent {
   percentage!: number;
 
   constructor(
+    private tripService: TripService,
     private uploadService: FileUploadService,
-    public db: AngularFireDatabase,
     private router: Router
-  ) {
-    this.trips = db.list('trips').valueChanges();
-  }
+  ) {}
 
   addTrip() {
     try {
-      this.db.list('trips').push({
-        destinationName: this.tripForm.value.destinationName,
-        localCurrency: this.tripForm.value.localCurrency,
-        imageUrl: this.tripForm.value.imageUrl,
-      });
-
+      this.tripForm.value.imageUrl = this.currentFileUpload.url;
+      this.tripService.addTrip(this.tripForm.value);
       this.router.navigate(['/home']);
     } catch (error) {
       console.error(error);

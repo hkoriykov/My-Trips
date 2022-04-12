@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ITrip } from 'src/app/core/interfaces';
 
 @Component({
@@ -6,10 +6,8 @@ import { ITrip } from 'src/app/core/interfaces';
   templateUrl: './trip-list-item.component.html',
   styleUrls: ['./trip-list-item.component.css'],
 })
-export class TripListItemComponent implements OnInit {
+export class TripListItemComponent {
   @Input() trip!: ITrip;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

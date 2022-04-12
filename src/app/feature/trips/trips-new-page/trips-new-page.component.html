@@ -2,10 +2,9 @@
   <h1>Add new trip</h1>
   <form #tripForm="ngForm" (ngSubmit)="addTrip()">
     <div class="form-group mb-3">
-      <label for="name">Destination name</label>
+      <label for="destinationName">Destination name</label>
       <input #destinationName="ngModel" name="destinationName" ngModel type="text" class="form-control"
         id="destinationName" required minlength="3">
-
       <ng-container *ngIf="destinationName.touched && destinationName.invalid">
         <div *ngIf="destinationName.errors?.['required']" class="alert alert-danger">
           Destination Name is required!
@@ -15,11 +14,11 @@
         </div>
       </ng-container>
     </div>
+
     <div class="form-group mb-3">
       <label for="localCurrency">Local currency</label>
       <input #localCurrency="ngModel" name="localCurrency" ngModel type="text" class="form-control" id="localCurrency"
         required minlength="2">
-
       <ng-container *ngIf="localCurrency.touched && localCurrency.invalid">
         <div *ngIf="localCurrency.errors?.['required']" class="alert alert-danger">
           Local Currency is required!
@@ -30,10 +29,8 @@
       </ng-container>
     </div>
 
-
     <div class="form-group mb-3">
       <label class="form-label" for="image">Destination image</label>
-
       <div class="row align-items-start">
         <div class="col">
           <input #imageUrl="ngModel" name="imageUrl" ngModel type="file" class="form-control" id="imageUrl" required
@@ -45,14 +42,35 @@
           </button>
         </div>
       </div>
-
+      <ng-container *ngIf="imageUrl.touched && imageUrl.invalid">
+        <div *ngIf="imageUrl.errors?.['required']" class="alert alert-danger">
+          Destination Image is required!
+        </div>
+      </ng-container>
       <div *ngIf="currentFileUpload" class="progress mt-2">
         <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}"
           aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
           {{ percentage }}%
         </div>
       </div>
+    </div>
 
+    <div class="form-group mb-3">
+      <label for="nativeLanguage">Native Language</label>
+      <input #nativeLanguage="ngModel" name="nativeLanguage" ngModel type="text" class="form-control"
+        id="nativeLanguage" required>
+      <ng-container *ngIf="nativeLanguage.touched && nativeLanguage.invalid">
+        <div *ngIf="nativeLanguage.errors?.['required']" class="alert alert-danger">
+          Native Language is required!
+        </div>
+      </ng-container>
+    </div>
+
+    <div class="form-group mb-3">
+      <label for="additionalInformation">Additional Information</label>
+      <textarea #additionalInformation="ngModel" name="additionalInformation" ngModel type="text" class="form-control"
+        id="additionalInformation" rows="4" cols="50" maxlength="400">
+      </textarea>
     </div>
 
     <div>
@@ -60,8 +78,9 @@
     </div>
 
     <div class="row mt-5">
-      <button (click)="navigateToHome()" class="btn btn-outline-secondary btn-sm w-25">Cancel</button>
-      <button [disabled]="tripForm.invalid" type="submit" class="btn btn-outline-success btn-sm w-25">Add</button>
+      <button type="button" (click)="navigateToHome()" class="btn btn-outline-secondary btn-sm w-25">Cancel</button>
+      <button [disabled]="!currentFileUpload || percentage < 100 || tripForm.invalid" type="submit"
+        class="btn btn-outline-success btn-sm w-25">Add</button>
     </div>
 
   </form>

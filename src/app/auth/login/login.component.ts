@@ -37,7 +37,8 @@ export class LoginComponent {
         this.loginFormGroup.value.email,
         this.loginFormGroup.value.password
       )
-      .then(() => {
+      .then((data) => {
+        console.log('JWT token ', data.user.multiFactor.user.accessToken);
         console.log('You are in!');
         this.authenticationService.isAuthenticated = true;
         this.router.navigate(['/home']);

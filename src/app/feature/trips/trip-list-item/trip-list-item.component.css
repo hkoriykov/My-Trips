@@ -12,9 +12,8 @@
     background-size: cover;
   }
 
-  .currency {
-    position: absolute;
-    margin-left: 70% !important;
-    margin-top: 25%!important;
+  .card:hover {
+    cursor: pointer;
   }
-  
+
+  a:link { text-decoration: none; }

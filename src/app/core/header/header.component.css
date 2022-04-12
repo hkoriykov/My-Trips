@@ -2,6 +2,10 @@ a:link {
   text-decoration: none;
 }
 
+.nav-link:hover {
+  background-color: lightgray;
+}
+
 .link {
   color: black;
 }
