@@ -75,7 +75,7 @@
     <div class="form-group mb-3">
       <label for="additionalInformation">Additional Information</label>
       <textarea #additionalInformation="ngModel" name="additionalInformation" [(ngModel)]="trip.additionalInformation" type="text" class="form-control"
-        id="additionalInformation" rows="4" cols="50" maxlength="400" required="">
+        id="additionalInformation" rows="4" cols="50" maxlength="300" required="">
       </textarea>
       <ng-container *ngIf="additionalInformation.touched && additionalInformation.invalid">
         <div *ngIf="additionalInformation.errors?.['required']" class="alert alert-danger">

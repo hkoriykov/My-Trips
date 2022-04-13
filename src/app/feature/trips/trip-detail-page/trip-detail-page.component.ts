@@ -8,11 +8,38 @@ import {
   faPencil,
   faDeleteLeft,
 } from '@fortawesome/free-solid-svg-icons';
+import {
+  animate,
+  query,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
 
 @Component({
   selector: 'app-trip-detail-page',
   templateUrl: './trip-detail-page.component.html',
   styleUrls: ['./trip-detail-page.component.css'],
+  animations: [
+    trigger('explainerAnim', [
+      transition(':enter', [
+        query(
+          '.col',
+          [
+            style({ opacity: 0, transform: 'translateX(-40px)' }),
+            stagger('300ms', [
+              animate(
+                '600ms 1.2s ease-out',
+                style({ opacity: 1, transform: 'translateX(0)' })
+              ),
+            ]),
+          ],
+          { optional: true }
+        ),
+      ]),
+    ]),
+  ],
 })
 export class TripDetailPageComponent implements OnInit {
   trip: ITrip = {} as ITrip;

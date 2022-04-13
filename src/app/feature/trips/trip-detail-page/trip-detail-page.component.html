@@ -13,34 +13,37 @@
                 <fa-icon [icon]="faDeleteLeft"></fa-icon>
             </span>
         </div>
-        <div class=" destination-name mb-5">
-            <h1>{{trip.destinationName}}</h1>
-        </div>
-        <div class="row align-items-start native-language">
-            <div class="col">
-                <span>
-                    <fa-icon [icon]="faLanguage"></fa-icon>
-                </span>
-            </div>
-            <div class="col">
-                <span>{{trip.nativeLanguage}}</span>
-            </div>
-        </div>
 
-        <div class="row align-items-start native-language mb-4">
-            <div class="col">
-                <span>
-                    <fa-icon [icon]="faSackDollar"></fa-icon>
-                </span>
+        <div @explainerAnim>
+            <div class="destination-name col mb-5">
+                <h1>{{trip.destinationName}}</h1>
             </div>
-            <div class="col">
-                <span>{{trip.localCurrency}}</span>
+            <div class="row align-items-start native-language">
+                <div class="col">
+                    <span>
+                        <fa-icon [icon]="faLanguage"></fa-icon>
+                    </span>
+                </div>
+                <div class="col">
+                    <span>{{trip.nativeLanguage}}</span>
+                </div>
             </div>
-        </div>
 
-        <div *ngIf="trip.additionalInformation" class="destination-description">
-            <p>Additional Information</p>
-            <span>{{trip.additionalInformation}}</span>
+            <div class="row align-items-start native-language mb-5">
+                <div class="col">
+                    <span>
+                        <fa-icon [icon]="faSackDollar"></fa-icon>
+                    </span>
+                </div>
+                <div class="col">
+                    <span>{{trip.localCurrency}}</span>
+                </div>
+            </div>
+
+            <div class="destination-description col">
+                <p class="col">Additional Information</p>
+                <span class="col">{{trip.additionalInformation}}</span>
+            </div>
         </div>
     </div>
 </main>
