@@ -6,14 +6,16 @@ import { TripDetailPageComponent } from './trip-detail-page/trip-detail-page.com
 import { TripListItemComponent } from './trip-list-item/trip-list-item.component';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { TripListComponent } from './trip-list/trip-list.component';
 
 @NgModule({
   declarations: [
     TripsNewPageComponent,
     TripDetailPageComponent,
     TripListItemComponent,
+    TripListComponent,
   ],
   imports: [CommonModule, TripsRoutingModule, FormsModule, FontAwesomeModule],
-  exports: [TripListItemComponent],
+  exports: [TripListItemComponent, TripListComponent],
 })
 export class TripsModule {}

@@ -1,0 +1,8 @@
+  <div class="row row-cols-1 row-cols-lg-3 g-4 py-5" *ngIf="trips">
+    <app-trip-list-item *ngFor="let trip of trips" [trip]="trip"></app-trip-list-item>
+    <div *ngIf="trips?.length==0">No Trips found!</div>
+  </div>
+
+  <div *ngIf="!trips">
+    Loading...
+  </div>
