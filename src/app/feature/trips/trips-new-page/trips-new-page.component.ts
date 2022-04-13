@@ -86,7 +86,11 @@ export class TripsNewPageComponent implements OnInit {
     );
   }
 
-  navigateToHome() {
-    this.router.navigate(['/home']);
+  navigateBack() {
+    if (this.isEditMode) {
+      this.router.navigate(['/trips', this.tripId]);
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }

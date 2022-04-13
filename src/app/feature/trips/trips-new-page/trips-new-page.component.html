@@ -89,7 +89,7 @@
     </div>
 
     <div class="row mt-5">
-      <button type="button" (click)="navigateToHome()" class="btn btn-outline-secondary btn-sm w-25">Cancel</button>
+      <button type="button" (click)="navigateBack()" class="btn btn-outline-secondary btn-sm w-25">Cancel</button>
       <button *ngIf="!isEditMode" (click)="addTrip()"
         [disabled]="!currentFileUpload || percentage < 100 || tripForm.invalid" type="submit"
         class="btn btn-outline-success btn-sm w-25">Add</button>

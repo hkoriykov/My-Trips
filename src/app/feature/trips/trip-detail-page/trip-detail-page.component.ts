@@ -6,6 +6,7 @@ import {
   faSackDollar,
   faLanguage,
   faPencil,
+  faDeleteLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -18,6 +19,7 @@ export class TripDetailPageComponent implements OnInit {
   faSackDollar = faSackDollar;
   faLanguage = faLanguage;
   faPencil = faPencil;
+  faDeleteLeft = faDeleteLeft;
 
   tripId!: string;
 
@@ -32,12 +34,17 @@ export class TripDetailPageComponent implements OnInit {
 
     this.tripService.getTripById(this.tripId).subscribe((trip) => {
       this.trip = trip;
-      console.log(trip);
     });
   }
 
   editTrip() {
     this.router.navigate(['/trips/edit', this.tripId]);
-    return false;
+  }
+
+  deleteTrip() {
+    if (confirm('Are sure you want to delete this item ?')) {
+      this.tripService.deleteTrip(this.tripId);
+      this.router.navigate(['/home']);
+    }
   }
 }

@@ -35,8 +35,8 @@ export class TripService {
     this.tripsCollection.push(trip);
   }
 
-  editTrip(trip: ITrip, tripId: string) {
-    this.db.database.ref('/trips/' + tripId).update(trip);
+  editTrip(trip: ITrip, id: string) {
+    this.db.database.ref('/trips/' + id).update(trip);
   }
 
   getTripById(id: string) {
@@ -44,5 +44,9 @@ export class TripService {
       .object(`trips/${id}`)
       .snapshotChanges()
       .pipe(map((res) => res.payload.val() as ITrip));
+  }
+
+  deleteTrip(id: string) {
+    this.db.database.ref('/trips/' + id).remove();
   }
 }
