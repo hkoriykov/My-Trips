@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'trips/:tripId',
     component: TripDetailPageComponent,
   },
+  {
+    path: 'trips/edit/:tripId',
+    component: TripsNewPageComponent,
+  },
 ];
 
 export const TripsRoutingModule = RouterModule.forChild(routes);

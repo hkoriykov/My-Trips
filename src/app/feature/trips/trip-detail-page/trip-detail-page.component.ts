@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ITrip } from 'src/app/core/interfaces';
 import { TripService } from 'src/app/core/services/trip/trip.service';
-import { faSackDollar, faLanguage } from '@fortawesome/free-solid-svg-icons';
+import {
+  faSackDollar,
+  faLanguage,
+  faPencil,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-trip-detail-page',
@@ -13,18 +17,27 @@ export class TripDetailPageComponent implements OnInit {
   trip: ITrip = {} as ITrip;
   faSackDollar = faSackDollar;
   faLanguage = faLanguage;
+  faPencil = faPencil;
+
+  tripId!: string;
 
   constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private tripService: TripService
   ) {}
 
   ngOnInit(): void {
-    const tripId = this.activatedRoute.snapshot.params['tripId'];
+    this.tripId = this.activatedRoute.snapshot.params['tripId'];
 
-    this.tripService.getTripById(tripId).subscribe((trip) => {
+    this.tripService.getTripById(this.tripId).subscribe((trip) => {
       this.trip = trip;
       console.log(trip);
     });
+  }
+
+  editTrip() {
+    this.router.navigate(['/trips/edit', this.tripId]);
+    return false;
   }
 }

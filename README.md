@@ -5,7 +5,7 @@ Recommends different places all over the world to visit. After a free registrati
 
 - Add new destination with all needed information about it;
 - Edit destination information;
-- Delete destionatin;
+- Delete destination;
 
 ## :boy: Author - [Hristiyan Koriykov](https://github.com/hkoriykov)
 

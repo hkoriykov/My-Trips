@@ -35,6 +35,10 @@ export class TripService {
     this.tripsCollection.push(trip);
   }
 
+  editTrip(trip: ITrip, tripId: string) {
+    this.db.database.ref('/trips/' + tripId).update(trip);
+  }
+
   getTripById(id: string) {
     return this.db
       .object(`trips/${id}`)

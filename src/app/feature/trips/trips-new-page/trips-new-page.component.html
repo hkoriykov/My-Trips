@@ -1,10 +1,11 @@
 <div class="container">
-  <h1>Add new trip</h1>
-  <form #tripForm="ngForm" (ngSubmit)="addTrip()">
+  <h1 *ngIf="!isEditMode">Add new trip</h1>
+  <h1 *ngIf="isEditMode">Edit trip</h1>
+  <form #tripForm="ngForm">
     <div class="form-group mb-3">
       <label for="destinationName">Destination name</label>
-      <input #destinationName="ngModel" name="destinationName" ngModel type="text" class="form-control"
-        id="destinationName" required minlength="3">
+      <input #destinationName="ngModel" name="destinationName" [(ngModel)]="trip.destinationName" type="text"
+        class="form-control" id="destinationName" required minlength="3" maxlength="14">
       <ng-container *ngIf="destinationName.touched && destinationName.invalid">
         <div *ngIf="destinationName.errors?.['required']" class="alert alert-danger">
           Destination Name is required!
@@ -17,8 +18,8 @@
 
     <div class="form-group mb-3">
       <label for="localCurrency">Local currency</label>
-      <input #localCurrency="ngModel" name="localCurrency" ngModel type="text" class="form-control" id="localCurrency"
-        required minlength="2">
+      <input #localCurrency="ngModel" name="localCurrency" [(ngModel)]="trip.localCurrency" type="text"
+        class="form-control" id="localCurrency" required minlength="2">
       <ng-container *ngIf="localCurrency.touched && localCurrency.invalid">
         <div *ngIf="localCurrency.errors?.['required']" class="alert alert-danger">
           Local Currency is required!
@@ -33,8 +34,13 @@
       <label class="form-label" for="image">Destination image</label>
       <div class="row align-items-start">
         <div class="col">
-          <input #imageUrl="ngModel" name="imageUrl" ngModel type="file" class="form-control" id="imageUrl" required
-            (change)="selectFile($event)" />
+
+
+          <input #imageUrl="ngModel" name="imageUrl" [(ngModel)]="trip.imageUrl" type="file" class="form-control"
+            id="imageUrl" (change)="selectFile($event)" />
+
+
+
         </div>
         <div class="col">
           <button class="btn btn-outline-success btn-sm mt-0 ms-1 w-25" [disabled]="!selectedFiles" (click)="upload()">
@@ -57,8 +63,8 @@
 
     <div class="form-group mb-3">
       <label for="nativeLanguage">Native Language</label>
-      <input #nativeLanguage="ngModel" name="nativeLanguage" ngModel type="text" class="form-control"
-        id="nativeLanguage" required>
+      <input #nativeLanguage="ngModel" name="nativeLanguage" [(ngModel)]="trip.nativeLanguage" type="text"
+        class="form-control" id="nativeLanguage" required>
       <ng-container *ngIf="nativeLanguage.touched && nativeLanguage.invalid">
         <div *ngIf="nativeLanguage.errors?.['required']" class="alert alert-danger">
           Native Language is required!
@@ -68,9 +74,14 @@
 
     <div class="form-group mb-3">
       <label for="additionalInformation">Additional Information</label>
-      <textarea #additionalInformation="ngModel" name="additionalInformation" ngModel type="text" class="form-control"
-        id="additionalInformation" rows="4" cols="50" maxlength="400">
+      <textarea #additionalInformation="ngModel" name="additionalInformation" [(ngModel)]="trip.additionalInformation" type="text" class="form-control"
+        id="additionalInformation" rows="4" cols="50" maxlength="400" required="">
       </textarea>
+      <ng-container *ngIf="additionalInformation.touched && additionalInformation.invalid">
+        <div *ngIf="additionalInformation.errors?.['required']" class="alert alert-danger">
+          Additional Information is required!
+        </div>
+      </ng-container>
     </div>
 
     <div>
@@ -79,8 +90,11 @@
 
     <div class="row mt-5">
       <button type="button" (click)="navigateToHome()" class="btn btn-outline-secondary btn-sm w-25">Cancel</button>
-      <button [disabled]="!currentFileUpload || percentage < 100 || tripForm.invalid" type="submit"
+      <button *ngIf="!isEditMode" (click)="addTrip()"
+        [disabled]="!currentFileUpload || percentage < 100 || tripForm.invalid" type="submit"
         class="btn btn-outline-success btn-sm w-25">Add</button>
+      <button *ngIf="isEditMode" (click)="editTrip()" [disabled]="tripForm.invalid" type="submit"
+        class="btn btn-outline-success btn-sm w-25">Edit</button>
     </div>
 
   </form>
