@@ -6,7 +6,7 @@ import { TripsNewPageComponent } from './trips-new-page/trips-new-page.component
 const routes: Routes = [
   {
     path: 'trips/new',
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     component: TripsNewPageComponent,
   },
   {

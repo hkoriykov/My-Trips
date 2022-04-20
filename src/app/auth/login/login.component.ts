@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -37,15 +37,12 @@ export class LoginComponent {
         this.loginFormGroup.value.email,
         this.loginFormGroup.value.password
       )
-      .then((data) => {
-        console.log('JWT token ', data.user.multiFactor.user.accessToken);
+      .then(() => {
         console.log('You are in!');
-        this.authenticationService.isAuthenticated = true;
         this.router.navigate(['/home']);
       })
       .catch((err) => {
         console.log('Something went wrong:', err.message);
-        this.authenticationService.isAuthenticated = false;
         this.firebaseErrorMessage = err;
       });
   }

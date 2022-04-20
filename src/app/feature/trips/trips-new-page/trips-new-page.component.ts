@@ -17,9 +17,9 @@ export class TripsNewPageComponent implements OnInit {
   @ViewChild('tripForm') tripForm!: NgForm;
   errorMessage!: any;
 
-  selectedFiles?: FileList;
   currentFileUpload!: FileUpload;
   percentage!: number;
+  fileToUpload?: File;
 
   trip: ITrip = {} as ITrip;
   tripId!: string;
@@ -68,14 +68,14 @@ export class TripsNewPageComponent implements OnInit {
     }
   }
 
-  selectFile(event: any): void {
-    this.selectedFiles = event.target.files;
+  selectFile(event: Event) {
+    const input: HTMLInputElement = event.target as HTMLInputElement;
+    this.fileToUpload = input.files![0];
+    console.log(this.fileToUpload);
   }
 
   upload(): void {
-    const file = this.selectedFiles?.item(0);
-    this.selectedFiles = undefined;
-    this.currentFileUpload = new FileUpload(file!);
+    this.currentFileUpload = new FileUpload(this.fileToUpload!);
     this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(
       (percentage) => {
         this.percentage = Math.round(percentage!);

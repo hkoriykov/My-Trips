@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication/authentication.service';
 
 @Component({
@@ -11,10 +12,20 @@ export class HeaderComponent {
     return this.authenticationService.isAuthenticated;
   }
 
-  constructor(private authenticationService: AuthenticationService) {}
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService
+  ) {}
 
   logoutHandler(): void {
-    this.authenticationService.isAuthenticated = false;
-    this.authenticationService.SignOut();
+    this.authenticationService
+      .SignOut()
+      .then(() => {
+        localStorage.removeItem('user');
+        this.router.navigate(['/home']);
+      })
+      .catch((err) => {
+        console.log('Something went wrong:', err.message);
+      });
   }
 }

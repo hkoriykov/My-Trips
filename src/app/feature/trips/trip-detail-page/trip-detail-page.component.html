@@ -5,16 +5,16 @@
     </div>
 
     <div class="right-column">
-        <div class="col buttons mb-3">
-            <span class="edit" title="Click here to edit the record" (click)="editTrip()">
-                <fa-icon [icon]="faPencil"></fa-icon>
-            </span>
-            <span class="delete ms-3" title="Click here to delete the record" (click)="deleteTrip()">
-                <fa-icon [icon]="faDeleteLeft"></fa-icon>
-            </span>
-        </div>
-
         <div @explainerAnim>
+            <div class="col buttons mb-3" *ngIf="isLogged">
+                <span class="edit" title="Click here to edit the record" (click)="editTrip()">
+                    <fa-icon [icon]="faPencil"></fa-icon>
+                </span>
+                <span class="delete ms-3" title="Click here to delete the record" (click)="deleteTrip()">
+                    <fa-icon [icon]="faDeleteLeft"></fa-icon>
+                </span>
+            </div>
+
             <div class="destination-name col mb-5">
                 <h1>{{trip.destinationName}}</h1>
             </div>

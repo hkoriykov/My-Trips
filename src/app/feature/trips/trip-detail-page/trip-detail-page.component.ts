@@ -16,6 +16,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { AuthenticationService } from 'src/app/core/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-trip-detail-page',
@@ -42,6 +43,10 @@ import {
   ],
 })
 export class TripDetailPageComponent implements OnInit {
+  get isLogged(): boolean {
+    return this.authenticationService.isAuthenticated;
+  }
+
   trip: ITrip = {} as ITrip;
   faSackDollar = faSackDollar;
   faLanguage = faLanguage;
@@ -53,7 +58,8 @@ export class TripDetailPageComponent implements OnInit {
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private tripService: TripService
+    private tripService: TripService,
+    private authenticationService: AuthenticationService
   ) {}
 
   ngOnInit(): void {
