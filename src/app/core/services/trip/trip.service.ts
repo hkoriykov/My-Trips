@@ -11,7 +11,7 @@ import { ITrip } from '../../interfaces';
 })
 export class TripService {
   tripsCollection!: AngularFireList<ITrip>;
-  trips!: Observable<any[]>;
+  trips!: Observable<ITrip[]>;
   trip!: AngularFireList<ITrip>;
 
   constructor(public db: AngularFireDatabase) {
@@ -24,11 +24,22 @@ export class TripService {
           return data;
         });
       })
-    ) as Observable<any[]>;
+    ) as Observable<ITrip[]>;
   }
 
-  getTrips() {
-    return this.trips;
+  getTrips(searchTerm: string = ''): Observable<ITrip[]> {
+    if (searchTerm === undefined || searchTerm === '') return this.trips;
+
+    return this.trips.pipe(
+      map((trips: ITrip[]) => {
+        let result = trips.filter((trip) =>
+          trip.destinationName
+            .toLocaleLowerCase()
+            .includes(searchTerm.toLocaleLowerCase())
+        );
+        return result;
+      })
+    );
   }
 
   addTrip(trip: ITrip) {

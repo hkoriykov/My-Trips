@@ -4,7 +4,7 @@ import { TripsRoutingModule } from './trips-routing.module';
 import { TripsNewPageComponent } from './trips-new-page/trips-new-page.component';
 import { TripDetailPageComponent } from './trip-detail-page/trip-detail-page.component';
 import { TripListItemComponent } from './trip-list-item/trip-list-item.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TripListComponent } from './trip-list/trip-list.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,6 +20,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CommonModule,
     TripsRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     FontAwesomeModule,
     BrowserAnimationsModule,
   ],
