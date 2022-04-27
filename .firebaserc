@@ -1,14 +1,5 @@
 {
-  "targets": {
-    "my-trips-9dff9": {
-      "hosting": {
-        "my-trips": [
-          "my-trips-web-app"
-        ]
-      }
-    }
-  },
   "projects": {
-    "default": "my-trips-9dff9"
+    "default": "mytrips-65715"
   }
 }

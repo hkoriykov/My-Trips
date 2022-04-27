@@ -102,8 +102,7 @@
             "prerender": false,
             "ssr": false,
             "browserTarget": "my-trips:build:production",
-            "firebaseProject": "my-trips-9dff9",
-            "firebaseHostingSite": "my-trips-web-app"
+            "firebaseProject": "my-trips-65715"
           }
         }
       }

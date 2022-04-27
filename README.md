@@ -1,13 +1,15 @@
 # MyTrips
 
 MyTrips is web application based on Angular and Firebase.
-Recommends different places all over the world to visit. After a free registration, you will be able to use all functions:
+You can search for different places all over the world. After a free registration, you will be able to use all functions:
 
 - Add new destination with all needed information about it;
 - Edit destination information;
 - Delete destination;
 
 ## :boy: Author - [Hristiyan Koriykov](https://github.com/hkoriykov)
+
+## :eyes: Try it out => https://mytrips-65715.web.app/
 
 ## :construction_worker: Built with
 
