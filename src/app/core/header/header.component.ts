@@ -9,7 +9,10 @@ import { AuthenticationService } from '../services/authentication/authentication
 })
 export class HeaderComponent {
   get isLogged(): boolean {
-    return this.authenticationService.isAuthenticated;
+    return this.authenticationService.isLogged;
+  }
+  get userEmail(): any {
+    return this.authenticationService.loggedUserEmail;
   }
 
   constructor(

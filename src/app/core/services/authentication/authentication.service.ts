@@ -5,19 +5,15 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  userState: any;
-  isAuthenticated: boolean = false;
+  isLogged: boolean = false;
+  loggedUserEmail: string | null | undefined;
 
   constructor(private angularFireAuth: AngularFireAuth) {
     this.angularFireAuth.authState.subscribe((user) => {
       if (user) {
-        this.userState = user;
-        localStorage.setItem('user', JSON.stringify(this.userState));
-        localStorage.setItem('isLogged', 'true');
-        this.isAuthenticated = true;
-      } else {
-        localStorage.setItem('user', '');
-        localStorage.setItem('isLogged', 'false');
+        user.getIdToken(true);
+        this.loggedUserEmail = user.email;
+        this.isLogged = true;
       }
     });
   }
@@ -26,12 +22,12 @@ export class AuthenticationService {
     return this.angularFireAuth.createUserWithEmailAndPassword(email, password);
   }
 
-  SignIn(email: string, password: string): Promise<any> {
+  SignIn(email: string, password: string) {
     return this.angularFireAuth.signInWithEmailAndPassword(email, password);
   }
 
   SignOut() {
-    this.isAuthenticated = false;
+    this.isLogged = false;
     return this.angularFireAuth.signOut();
   }
 }

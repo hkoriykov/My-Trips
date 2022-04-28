@@ -1,9 +1,15 @@
 <div class="container">
-  <h1 *ngIf="!isEditMode">Add new trip</h1>
-  <h1 *ngIf="isEditMode">Edit trip</h1>
+
+  <div *ngIf="!isEditMode;else edit_trip">
+    <h1>Add new trip</h1>
+  </div>
+  <ng-template #edit_trip>
+    <h1>Edit trip</h1>
+  </ng-template>
+
   <form #tripForm="ngForm">
     <div class="form-group mb-3">
-      <label for="destinationName">Destination name</label>
+      <label for="destinationName"><span class="red">*</span> Destination name</label>
       <input #destinationName="ngModel" name="destinationName" [(ngModel)]="trip.destinationName" type="text"
         class="form-control" id="destinationName" required minlength="3" maxlength="10">
       <ng-container *ngIf="destinationName.touched && destinationName.invalid">
@@ -17,7 +23,7 @@
     </div>
 
     <div class="form-group mb-3">
-      <label for="localCurrency">Local currency</label>
+      <label for="localCurrency"><span class="red">*</span> Local currency</label>
       <input #localCurrency="ngModel" name="localCurrency" [(ngModel)]="trip.localCurrency" type="text"
         class="form-control" id="localCurrency" required minlength="2">
       <ng-container *ngIf="localCurrency.touched && localCurrency.invalid">
@@ -34,15 +40,7 @@
       <label class="form-label" for="image">Destination image</label>
       <div class="row align-items-start">
         <div class="col">
-
-
-          <!-- <input #imageUrl="ngModel" name="imageUrl" [(ngModel)]="trip.imageUrl" type="file" accept="image/jpg" class="form-control"
-            id="imageUrl" (change)="selectFile($event)" /> -->
-
-            <input type="file" accept="image/jpeg" id="imageUrl" class="form-control" (change)="selectFile($event)">
-
-
-
+          <input type="file" accept="image/jpeg" class="form-control" (change)="selectFile($event)" />
         </div>
         <div class="col">
           <button class="btn btn-outline-success btn-sm mt-0 ms-1 w-25" [disabled]="!fileToUpload" (click)="upload()">
@@ -50,11 +48,8 @@
           </button>
         </div>
       </div>
-      <!-- <ng-container *ngIf="imageUrl.touched && imageUrl.invalid">
-        <div *ngIf="imageUrl.errors?.['required']" class="alert alert-danger">
-          Destination Image is required!
-        </div>
-      </ng-container> -->
+
+
       <div *ngIf="currentFileUpload" class="progress mt-2">
         <div class="progress-bar progress-bar-info" role="progressbar" attr.aria-valuenow="{{ percentage }}"
           aria-valuemin="0" aria-valuemax="100" [ngStyle]="{ width: percentage + '%' }">
@@ -64,7 +59,7 @@
     </div>
 
     <div class="form-group mb-3">
-      <label for="nativeLanguage">Native Language</label>
+      <label for="nativeLanguage"><span class="red">*</span> Native Language</label>
       <input #nativeLanguage="ngModel" name="nativeLanguage" [(ngModel)]="trip.nativeLanguage" type="text"
         class="form-control" id="nativeLanguage" required>
       <ng-container *ngIf="nativeLanguage.touched && nativeLanguage.invalid">
@@ -75,9 +70,9 @@
     </div>
 
     <div class="form-group mb-3">
-      <label for="additionalInformation">Additional Information</label>
-      <textarea #additionalInformation="ngModel" name="additionalInformation" [(ngModel)]="trip.additionalInformation" type="text" class="form-control"
-        id="additionalInformation" rows="4" cols="50" maxlength="300" required="">
+      <label for="additionalInformation"><span class="red">*</span> Additional Information</label>
+      <textarea #additionalInformation="ngModel" name="additionalInformation" [(ngModel)]="trip.additionalInformation"
+        type="text" class="form-control" id="additionalInformation" rows="4" cols="50" maxlength="300" required="">
       </textarea>
       <ng-container *ngIf="additionalInformation.touched && additionalInformation.invalid">
         <div *ngIf="additionalInformation.errors?.['required']" class="alert alert-danger">
@@ -92,8 +87,7 @@
 
     <div class="row mt-5">
       <button type="button" (click)="navigateBack()" class="btn btn-outline-secondary btn-sm w-25">Cancel</button>
-      <button *ngIf="!isEditMode" (click)="addTrip()"
-        [disabled]="!currentFileUpload || percentage < 100 || tripForm.invalid" type="submit"
+      <button *ngIf="!isEditMode" (click)="addTrip()" [disabled]="tripForm.invalid" type="submit"
         class="btn btn-outline-success btn-sm w-25">Add</button>
       <button *ngIf="isEditMode" (click)="editTrip()" [disabled]="tripForm.invalid" type="submit"
         class="btn btn-outline-success btn-sm w-25">Edit</button>

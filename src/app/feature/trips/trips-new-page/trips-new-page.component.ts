@@ -15,7 +15,7 @@ export const editRoute = 'edit';
 })
 export class TripsNewPageComponent implements OnInit {
   @ViewChild('tripForm') tripForm!: NgForm;
-  errorMessage!: any;
+  errorMessage!: unknown;
 
   currentFileUpload!: FileUpload;
   percentage!: number;
@@ -46,7 +46,12 @@ export class TripsNewPageComponent implements OnInit {
 
   addTrip() {
     try {
-      this.tripForm.value.imageUrl = this.currentFileUpload.url;
+      if (this.currentFileUpload) {
+        this.tripForm.value.imageUrl = this.currentFileUpload.url;
+      } else {
+        this.tripForm.value.imageUrl = '/assets/no-image-found.png';
+      }
+
       this.tripService.addTrip(this.tripForm.value);
       this.router.navigate(['/home']);
     } catch (error) {
@@ -71,7 +76,6 @@ export class TripsNewPageComponent implements OnInit {
   selectFile(event: Event) {
     const input: HTMLInputElement = event.target as HTMLInputElement;
     this.fileToUpload = input.files![0];
-    console.log(this.fileToUpload);
   }
 
   upload(): void {

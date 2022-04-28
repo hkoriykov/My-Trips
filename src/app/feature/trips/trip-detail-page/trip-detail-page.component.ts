@@ -44,16 +44,16 @@ import { AuthenticationService } from 'src/app/core/services/authentication/auth
 })
 export class TripDetailPageComponent implements OnInit {
   get isLogged(): boolean {
-    return this.authenticationService.isAuthenticated;
+    return this.authenticationService.isLogged;
   }
 
   trip: ITrip = {} as ITrip;
+  tripId!: string;
+
   faSackDollar = faSackDollar;
   faLanguage = faLanguage;
   faPencil = faPencil;
   faDeleteLeft = faDeleteLeft;
-
-  tripId!: string;
 
   constructor(
     private router: Router,
@@ -66,6 +66,9 @@ export class TripDetailPageComponent implements OnInit {
     this.tripId = this.activatedRoute.snapshot.params['tripId'];
 
     this.tripService.getTripById(this.tripId).subscribe((trip) => {
+      if (trip == null) {
+        this.router.navigate(['**']);
+      }
       this.trip = trip;
     });
   }
@@ -75,7 +78,7 @@ export class TripDetailPageComponent implements OnInit {
   }
 
   deleteTrip() {
-    if (confirm('Are sure you want to delete this item ?')) {
+    if (confirm('Are you sure you want to delete this item ?')) {
       this.tripService.deleteTrip(this.tripId);
       this.router.navigate(['/home']);
     }

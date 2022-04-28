@@ -39,7 +39,7 @@ export class RegisterComponent {
       )
       .then((res: any) => {
         console.log('You are Successfully signed up!', res);
-        this.authenticationService.isAuthenticated = true;
+        this.authenticationService.isLogged = true;
         this.router.navigate(['/home']);
       })
       .catch((err) => {

@@ -24,6 +24,7 @@
         </div>
 
         <div *ngIf="isLogged">
+          <span>Hello, {{userEmail}}</span>
           <button type="button" class="btn btn-outline-secondary logout" (click)="logoutHandler()">
             Logout
           </button>

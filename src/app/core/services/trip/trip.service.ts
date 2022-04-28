@@ -50,7 +50,7 @@ export class TripService {
     this.db.database.ref('/trips/' + id).update(trip);
   }
 
-  getTripById(id: string) {
+  getTripById(id: string): Observable<ITrip> {
     return this.db
       .object(`trips/${id}`)
       .snapshotChanges()
