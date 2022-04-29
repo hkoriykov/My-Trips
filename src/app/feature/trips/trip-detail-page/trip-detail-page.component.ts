@@ -66,9 +66,6 @@ export class TripDetailPageComponent implements OnInit {
     this.tripId = this.activatedRoute.snapshot.params['tripId'];
 
     this.tripService.getTripById(this.tripId).subscribe((trip) => {
-      if (trip == null) {
-        this.router.navigate(['**']);
-      }
       this.trip = trip;
     });
   }

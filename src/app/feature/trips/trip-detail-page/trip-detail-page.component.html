@@ -1,12 +1,13 @@
-<main class="container">
+<div class="image"></div>
 
+<main class="container">
     <div class="left-column">
         <img class="active" src={{trip.imageUrl}} alt="">
     </div>
 
     <div class="right-column">
         <div @explainerAnim>
-            <div class="col buttons mb-3" *ngIf="isLogged">
+            <div class="col buttons mb-3" data-qa="action-menu" *ngIf="isLogged">
                 <span class="edit" title="Click here to edit the record" (click)="editTrip()">
                     <fa-icon [icon]="faPencil"></fa-icon>
                 </span>
@@ -29,7 +30,7 @@
                 </div>
             </div>
 
-            <div class="row align-items-start native-language mb-5">
+            <div class="row align-items-start local-currency mb-5">
                 <div class="col">
                     <span>
                         <fa-icon [icon]="faSackDollar"></fa-icon>

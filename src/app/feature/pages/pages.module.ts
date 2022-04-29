@@ -5,8 +5,10 @@ import { PageNotFoundPageComponent } from './page-not-found-page/page-not-found-
 import { RouterModule } from '@angular/router';
 import { TripsModule } from '../trips/trips.module';
 
+import { MdbCarouselModule } from 'mdb-angular-ui-kit/carousel';
+
 @NgModule({
   declarations: [HomePageComponent, PageNotFoundPageComponent],
-  imports: [CommonModule, TripsModule, RouterModule],
+  imports: [CommonModule, TripsModule, RouterModule, MdbCarouselModule],
 })
 export class PagesModule {}

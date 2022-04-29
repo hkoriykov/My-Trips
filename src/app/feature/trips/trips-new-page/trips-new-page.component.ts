@@ -53,7 +53,7 @@ export class TripsNewPageComponent implements OnInit {
       }
 
       this.tripService.addTrip(this.tripForm.value);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/trips']);
     } catch (error) {
       console.error(error);
       this.errorMessage = error;
@@ -66,7 +66,7 @@ export class TripsNewPageComponent implements OnInit {
         this.tripForm.value.imageUrl = this.currentFileUpload.url;
       }
       this.tripService.editTrip(this.tripForm.value, this.tripId);
-      this.router.navigate(['/home']);
+      this.router.navigate(['/trips']);
     } catch (error) {
       console.error(error);
       this.errorMessage = error;

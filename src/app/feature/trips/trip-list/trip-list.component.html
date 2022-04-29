@@ -1,16 +1,23 @@
-<div class="position-relative">
-  <div class="position-absolute end-0 mt-3">
-    <form >
-      <input [formControl]="searchControl" type="text" placeholder="Search for trips">
-    </form>
+<div class="image"></div>
+<div class="main">
+  <div class="container">
+    <h2 class="pb-2 border-bottom">Trips you might be interested in...</h2>
+
+    <div class="position-relative">
+      <div class="position-absolute end-0">
+        <form>
+          <input [formControl]="searchControl" type="text" placeholder="Search for trips">
+        </form>
+      </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-lg-3 g-4 py-5 mt-2" *ngIf="trips">
+      <app-trip-list-item *ngFor="let trip of trips" [trip]="trip"></app-trip-list-item>
+      <div *ngIf="trips?.length==0">No Trips found!</div>
+    </div>
+
+    <div *ngIf="!trips">
+      <mat-spinner></mat-spinner>
+    </div>
   </div>
 </div>
-
-  <div class="row row-cols-1 row-cols-lg-3 g-4 py-5" *ngIf="trips">
-    <app-trip-list-item *ngFor="let trip of trips" [trip]="trip"></app-trip-list-item>
-    <div *ngIf="trips?.length==0">No Trips found!</div>
-  </div>
-
-  <div *ngIf="!trips">
-    <mat-spinner></mat-spinner>
-  </div>
